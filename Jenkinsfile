@@ -13,22 +13,20 @@ pipeline {
         }
         stage('Build Project') {
             steps {
-            // Make mvnw executable
+                // Make mvnw executable
                 sh 'chmod +x ./mvnw'
                 sh './mvnw clean package'
             }
         }
-
-        }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
+                sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
             }
         }
         stage('Push Docker Image') {
             steps {
                 withDockerRegistry([credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", url: ""]) {
-                    sh 'docker push ${DOCKER_IMAGE}:${DOCKER_TAG}'
+                    sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 }
             }
         }
