@@ -1,0 +1,32 @@
+global:
+  resolve_timeout: 1m
+  slack_api_url: 'https://hooks.slack.com/services/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'
+
+route:
+  receiver: lab-alert-manager
+  group_by: ['alertname']
+  group_interval: 1m
+  repeat_interval: 1m
+
+receivers:
+  - name: 'lab-alert-manager'
+    telegram_configs:
+      - bot_token: '7616412065:AAHZZo53JHXCXpIBDEQHSGTgz-xUnjLV9zg'
+        api_url: 'https://api.telegram.org'
+        chat_id: 7564952643
+        parse_mode: ''
+        send_resolved: true
+
+    email_configs:
+      - to: 'hannachiines369@gmail.com'
+        from: 'hannachiines369@gmail.com'
+        smarthost: 'smtp.gmail.com:587'
+        auth_username: 'hannachiines369@gmail.com'
+        auth_identity: 'hannachiines369@gmail.com'
+        auth_password: 'nzdv zjrm lizi psas'
+        send_resolved: true
+
+    slack_configs:
+      - channel: '#iness_monitoring'
+        send_resolved: true
+
