@@ -13,8 +13,12 @@ pipeline {
         }
         stage('Build Project') {
             steps {
+            // Make mvnw executable
+                sh 'chmod +x ./mvnw'
                 sh './mvnw clean package'
             }
+        }
+
         }
         stage('Build Docker Image') {
             steps {
